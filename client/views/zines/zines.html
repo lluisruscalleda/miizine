@@ -33,6 +33,17 @@
       Categorie is required.
     </span>
   </div>
+  <div class="form-group"
+       ng-class="{'has-error': zineForm.image.$invalid
+        && zineForm.image.$dirty}">
+    <input type="text" class="form-control focus" name="image"
+           placeholder="Image url" autocomplete="off" required
+           ng-model="newZine.image">
+    <span class="has-error control-label" ng-show="
+        zineForm.categorie.$invalid && zineForm.image.$dirty">
+      Image url is required.
+    </span>
+  </div>
   <button class="btn btn-default" ng-disabled="zineForm.$invalid">Add</button>
 </form>
 <hr>

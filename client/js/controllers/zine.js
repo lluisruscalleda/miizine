@@ -27,6 +27,7 @@ angular
           $scope.zineForm.title.$setPristine();
           $scope.zineForm.description.$setPristine();
           $scope.zineForm.categorie.$setPristine();
+          $scope.zineForm.image.$setPristine();
           $('.focus').focus();
           getList();
         });

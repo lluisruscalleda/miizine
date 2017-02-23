@@ -17,6 +17,9 @@
     },
     "categorie": {
       "type": "string"
+    },
+    "image": {
+      "type": "string"
     }
   },
   "validations": [],
