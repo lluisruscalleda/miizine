@@ -1,0 +1,51 @@
+<h1>Zine list</h1>
+<hr>
+<form name="zineForm" novalidate ng-submit="add()">
+  <div class="form-group"
+       ng-class="{'has-error': zineForm.title.$invalid
+        && zineForm.title.$dirty}">
+    <input type="text" class="form-control focus" name="title"
+           placeholder="Title" autocomplete="off" required
+           ng-model="newZine.title">
+    <span class="has-error control-label" ng-show="
+        zineForm.title.$invalid && zineForm.title.$dirty">
+      Title is required.
+    </span>
+  </div>
+  <div class="form-group"
+       ng-class="{'has-error': zineForm.description.$invalid
+        && zineForm.description.$dirty}">
+    <textarea class="form-control focus" name="description" placeholder="Description" required
+              ng-model="newZine.description"></textarea>
+    <span class="has-error control-label" ng-show="
+        zineForm.description.$invalid && zineForm.description.$dirty">
+      Description is required.
+    </span>
+  </div>
+  <div class="form-group"
+       ng-class="{'has-error': zineForm.categorie.$invalid
+        && zineForm.categorie.$dirty}">
+    <input type="text" class="form-control focus" name="categorie"
+           placeholder="Categorie" autocomplete="off" required
+           ng-model="newZine.categorie">
+    <span class="has-error control-label" ng-show="
+        zineForm.categorie.$invalid && zineForm.categorie.$dirty">
+      Categorie is required.
+    </span>
+  </div>
+  <button class="btn btn-default" ng-disabled="zineForm.$invalid">Add</button>
+</form>
+<hr>
+<form>
+  <div class="form-group">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search a zine" ng-model="searchString">
+    </div>
+  </div>
+</form>
+<div class="list-group">
+  <a class="list-group-item title" ng-repeat="zine in zines | searchFor:searchString | orderBy: 'title'">{{zine.title}}&nbsp;
+    <span class="list-categorie">{{zine.categorie}}</span>&nbsp;
+    <i class="glyphicon glyphicon-remove pull-right"
+       ng-click="remove({ id: zine.id })"></i></a>
+</div>
