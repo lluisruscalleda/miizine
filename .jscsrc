@@ -9,8 +9,7 @@
   "excludeFiles": [
     "node_modules/**",
     "coverage/*",
-    "client/*",
-    "client/vendor"
+    "client/*"
   ],
   "maximumLineLength": { "value": 120, "allExcept": [ "functionSignature", "urlComments", "regex", "comments", "require"] }
 }

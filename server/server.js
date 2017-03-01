@@ -2,6 +2,8 @@
 const loopback = require('loopback');
 const boot = require('loopback-boot');
 
+//const diContainer = require('./di-container-config'); // DI container
+
 (function Server() {
   // const appConfig = require('./config/main-config.js');
   // const errorConfig = require('./config/error-config.js');
@@ -20,6 +22,7 @@ const boot = require('loopback-boot');
       app.emit('started');
       const baseUrl = app.get('url').replace(/\/$/, '');
       console.log('Web server listening at: %s', baseUrl);
+
       if (app.get('loopback-component-explorer')) {
         const explorerPath = app.get('loopback-component-explorer').mountPath;
         console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
@@ -33,7 +36,21 @@ const boot = require('loopback-boot');
     if (err) throw err;
 
     // start the server if `$ node server.js`
-    if (require.main === module) app.start();
+    if (require.main === module) {
+      //app.start();
+      app.io = require('socket.io')(app.start());
+      app.io.on('connection', function (socket) {
+        console.log('a user connected');
+        socket.on('chat message', function (msg) {
+          console.log('message: ' + msg);
+          app.io.emit('chat message', msg);
+        });
+
+        socket.on('disconnect', function () {
+          console.log('user disconnected');
+        });
+      });
+    }
   });
 
   var path = require('path');
